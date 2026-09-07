@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: bronze
+    schema: bronze
+    description: "Dados brutos preservados pela ingestão Python em Delta Lake."
+
+    tables:
+
+      - name: reclamacoes
+        description: "Reclamações provenientes da fonte CSV, preservadas na Bronze."
+
+      - name: sessoes_conciliacao
+        description: "Sessões de conciliação provenientes da fonte JSON, preservadas na Bronze."

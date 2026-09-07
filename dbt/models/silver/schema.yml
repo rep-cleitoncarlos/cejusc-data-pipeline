@@ -1,0 +1,77 @@
+version: 2
+
+models:
+
+  - name: stg_reclamacoes
+    description: >
+      Dados de reclamações tratados e padronizados a partir da fonte Bronze.
+      Uma linha representa uma reclamação.
+
+    columns:
+
+      - name: id_reclamacao
+        description: "Identificador único da reclamação."
+        tests:
+          - not_null
+          - unique
+
+      - name: id_processo
+        description: "Identificador do processo associado à reclamação."
+        tests:
+          - not_null
+
+      - name: data_reclamacao
+        description: "Data em que a reclamação foi registrada."
+        tests:
+          - not_null
+
+      - name: tipo_reclamacao
+        description: "Tipo de reclamação padronizado."
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - cancelamento de serviço
+                  - cobranca_indevida
+                  - falha_servico
+                  - problema contratual
+
+  - name: stg_sessoes
+    description: >
+      Dados de sessões de conciliação tratados e padronizados a partir
+      da fonte Bronze. Uma linha representa uma sessão.
+
+    columns:
+
+      - name: id_sessao
+        description: "Identificador único da sessão."
+        tests:
+          - not_null
+          - unique
+
+      - name: id_reclamacao
+        description: "Identificador da reclamação associada à sessão."
+        tests:
+          - not_null
+          - relationships:
+              arguments:          
+                to: ref('stg_reclamacoes')
+                field: id_reclamacao
+
+      - name: data_sessao
+        description: "Data em que a sessão ocorreu."
+        tests:
+          - not_null
+
+      - name: resultado
+        description: "Resultado padronizado da sessão."
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - ACORDO
+                  - NAO_ACORDO
+                  - AUSENTE_RECLAMANTE
+                  - AUSENTE_RECLAMADO

@@ -1,0 +1,8 @@
+cejusc:
+  target: dev
+
+  outputs:
+    dev:
+      type: duckdb
+      path: ../data/cejusc.duckdb
+      threads: 4

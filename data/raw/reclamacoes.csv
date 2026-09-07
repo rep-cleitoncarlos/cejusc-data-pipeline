@@ -1,0 +1,41 @@
+id_reclamacao;id_processo;data_reclamacao;tipo_reclamacao;valor_reclamado;canal;conciliador_id;modalidade_preferida
+REC-0001;PROC-2026-00001;2026-01-11;Cobrança indevida;480.00;Presencial;CONC-002;Presencial
+REC-0002;PROC-2026-00002;2026-01-17;Cancelamento de serviço;1200.00;Aplicativo;CONC-003;Online
+REC-0003;PROC-2026-00003;2026-01-23;Falha na prestação de serviço;250.00;Portal;CONC-004;Presencial
+REC-0004;PROC-2026-00004;2026-01-29;Problema contratual;650.00;Presencial;CONC-001;Online
+REC-0005;PROC-2026-00005;2026-02-04;Cobrança indevida;1500.00;Aplicativo;CONC-002;Presencial
+REC-0006;PROC-2026-00006;2026-02-10;Cancelamento de serviço;320.00;Portal;CONC-003;Online
+REC-0007;PROC-2026-00007;2026-02-16;cobranca indevida;900.00;Presencial;CONC-004;Presencial
+REC-0008;PROC-2026-00008;2026-02-22;Problema contratual;180.00;Aplicativo;CONC-001;Online
+REC-0009;PROC-2026-00009;2026-02-28;Cobrança indevida;480.00;Portal;CONC-002;Presencial
+REC-0010;PROC-2026-00010;2026-03-06;Cancelamento de serviço;1200.00;Presencial;CONC-003;Online
+REC-0011;PROC-2026-00011;2026-03-12;Falha na prestação de serviço;250.00;Aplicativo;CONC-004;Presencial
+REC-0012;PROC-2026-00012;2026-03-18;Problema contratual;650.00;Portal;CONC-001;Online
+REC-0013;PROC-2026-00013;2026-03-24;Cobrança indevida;;Presencial;CONC-002;Presencial
+REC-0014;PROC-2026-00014;2026-03-30;Cancelamento de serviço;320.00;Aplicativo;CONC-003;Online
+REC-0015;PROC-2026-00015;2026-04-05;Falha na prestação de serviço;900.00;Portal;CONC-004;Presencial
+REC-0016;PROC-2026-00016;2026-04-11;Problema contratual;180.00;Presencial;CONC-001;Online
+REC-0017;PROC-2026-00017;2026-04-17;Cobrança indevida;480.00;Aplicativo;CONC-002;Presencial
+REC-0018;PROC-2026-00018;2026-04-23;Cancelamento de serviço;1200.00;Portal;CONC-003;Online
+REC-0019;PROC-2026-00019;2026-04-29;cobranca indevida;250.00;Presencial;CONC-004;Presencial
+REC-0020;PROC-2026-00020;2026-05-05;Problema contratual;650.00;Aplicativo;CONC-001;Online
+REC-0021;PROC-2026-00021;2026-05-11;Cobrança indevida;1500.00;Portal;CONC-002;Presencial
+REC-0022;PROC-2026-00022;2026-05-17;Cancelamento de serviço;320,00;Presencial;CONC-003;Online
+REC-0023;PROC-2026-00023;2026-05-23;Falha na prestação de serviço;900.00;Aplicativo;CONC-004;Presencial
+REC-0024;PROC-2026-00024;2026-05-29;Problema contratual;180.00;Portal;CONC-001;Online
+REC-0025;PROC-2026-00025;2026-06-04;Cobrança indevida;480.00;Presencial;CONC-002;Presencial
+REC-0026;PROC-2026-00026;2026-06-10;Cancelamento de serviço;1200.00;Aplicativo;CONC-003;Online
+REC-0027;PROC-2026-00027;2026-06-16;Falha na prestação de serviço;250.00;Portal;CONC-004;Presencial
+REC-0028;PROC-2026-00028;2026-06-22;COBRANÇA INDEVIDA;650.00;Presencial;CONC-001;Online
+REC-0029;PROC-2026-00029;2026-06-28;Cobrança indevida;1500.00;Aplicativo;CONC-002;Presencial
+REC-0030;PROC-2026-00030;2026-07-04;Cancelamento de serviço;320.00;Portal;CONC-003;Online
+REC-0031;PROC-2026-00031;2026-07-10;Falha na prestação de serviço;900.00;Presencial;CONC-004;Presencial
+REC-0032;PROC-2026-00032;2026-07-16;Problema contratual;180.00;Aplicativo;CONC-001;Online
+REC-0033;PROC-2026-00033;2026-07-22;Cobrança indevida;480.00;Portal;CONC-002;Presencial
+REC-0034;PROC-2026-00034;2026-07-28;Falha no servico;1200.00;Presencial;CONC-003;Online
+REC-0035;PROC-2026-00035;2026-08-03;Falha na prestação de serviço;250.00;Aplicativo;CONC-004;Presencial
+REC-0036;PROC-2026-00036;2026-08-09;Problema contratual;650.00;Portal;CONC-001;Online
+REC-0037;PROC-2026-00037;2026-01-07;Cobrança indevida;1500.00;Presencial;CONC-002;Presencial
+REC-0038;PROC-2026-00038;2026-01-13;Cancelamento de serviço;320.00;Aplicativo;CONC-003;Online
+REC-0039;PROC-2026-00039;2026-01-19;Falha na prestação de serviço;900.00;Portal;CONC-004;Presencial
+REC-0040;PROC-2026-00040;2026-01-25;Problema contratual;180.00;Presencial;CONC-001;Online

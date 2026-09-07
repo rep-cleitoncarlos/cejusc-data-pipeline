@@ -1,0 +1,23 @@
+name: 'cejusc'
+version: '1.0.0'
+profile: 'cejusc'
+
+model-paths: ["models"]
+
+target-path: "target"
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+on-run-start:
+  - "{{ register_delta_sources() }}"
+
+models:
+  cejusc:
+    silver:
+      +materialized: table
+    gold:
+      +materialized: table
+    consumo:
+      +materialized: table

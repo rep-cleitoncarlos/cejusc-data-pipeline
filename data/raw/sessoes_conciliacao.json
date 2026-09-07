@@ -1,0 +1,402 @@
+[
+  {
+    "id_sessao": "SES-0001",
+    "id_reclamacao": "REC-0001",
+    "data_sessao": "2026-01-26",
+    "resultado": "ACORDO",
+    "valor_acordo": 336.0,
+    "parcelas": 2,
+    "tempo_sessao_minutos": 35,
+    "observacao": "Acordo formalizado entre as partes."
+  },
+  {
+    "id_sessao": "SES-0002",
+    "id_reclamacao": "REC-0002",
+    "data_sessao": "2026-02-01",
+    "resultado": "AUSENTE_RECLAMANTE",
+    "valor_acordo": null,
+    "parcelas": null,
+    "tempo_sessao_minutos": 40,
+    "observacao": "Não houve acordo na sessão."
+  },
+  {
+    "id_sessao": "SES-0003",
+    "id_reclamacao": "REC-0003",
+    "data_sessao": "2026-02-07",
+    "resultado": "AUSENTE_RECLAMADO",
+    "valor_acordo": null,
+    "parcelas": null,
+    "tempo_sessao_minutos": 50,
+    "observacao": "Não houve acordo na sessão."
+  },
+  {
+    "id_sessao": "SES-0004",
+    "id_reclamacao": "REC-0004",
+    "data_sessao": "2026-02-13",
+    "resultado": "ACORDO",
+    "valor_acordo": 260.0,
+    "parcelas": 2,
+    "tempo_sessao_minutos": 60,
+    "observacao": "Acordo formalizado entre as partes."
+  },
+  {
+    "id_sessao": "SES-0005",
+    "id_reclamacao": "REC-0005",
+    "data_sessao": "2026-02-19",
+    "resultado": "ACORDO",
+    "valor_acordo": 1200.0,
+    "parcelas": 3,
+    "tempo_sessao_minutos": 75,
+    "observacao": "Acordo formalizado entre as partes."
+  },
+  {
+    "id_sessao": "SES-0006",
+    "id_reclamacao": "REC-0006",
+    "data_sessao": "2026-02-25",
+    "resultado": "ACORDO",
+    "valor_acordo": 224.0,
+    "parcelas": 1,
+    "tempo_sessao_minutos": 25,
+    "observacao": "Acordo formalizado entre as partes."
+  },
+  {
+    "id_sessao": "SES-0007",
+    "id_reclamacao": "REC-0007",
+    "data_sessao": "2026-03-03",
+    "resultado": "AUSENTE_RECLAMADO",
+    "valor_acordo": null,
+    "parcelas": null,
+    "tempo_sessao_minutos": 35,
+    "observacao": "Não houve acordo na sessão."
+  },
+  {
+    "id_sessao": "SES-0008",
+    "id_reclamacao": "REC-0008",
+    "data_sessao": "2026-03-09",
+    "resultado": "ACORDO",
+    "valor_acordo": 90.0,
+    "parcelas": 3,
+    "tempo_sessao_minutos": 40,
+    "observacao": "Acordo formalizado entre as partes."
+  },
+  {
+    "id_sessao": "SES-0009",
+    "id_reclamacao": "REC-0009",
+    "data_sessao": "2026-03-15",
+    "resultado": "Não Acordo",
+    "valor_acordo": null,
+    "parcelas": null,
+    "tempo_sessao_minutos": 50,
+    "observacao": "Não houve acordo na sessão."
+  },
+  {
+    "id_sessao": "SES-0010",
+    "id_reclamacao": "REC-0010",
+    "data_sessao": "2026-03-21",
+    "resultado": "ACORDO",
+    "valor_acordo": 960.0,
+    "parcelas": 2,
+    "tempo_sessao_minutos": 60,
+    "observacao": "Acordo formalizado entre as partes."
+  },
+  {
+    "id_sessao": "SES-0011",
+    "id_reclamacao": "REC-0011",
+    "data_sessao": "2026-03-27",
+    "resultado": "ACORDO",
+    "valor_acordo": 175.0,
+    "parcelas": 3,
+    "tempo_sessao_minutos": 75,
+    "observacao": "Acordo formalizado entre as partes."
+  },
+  {
+    "id_sessao": "SES-0012",
+    "id_reclamacao": "REC-0012",
+    "data_sessao": "2026-04-02",
+    "resultado": "ACORDO",
+    "valor_acordo": 390.0,
+    "parcelas": 1,
+    "tempo_sessao_minutos": 25,
+    "observacao": "Acordo formalizado entre as partes."
+  },
+  {
+    "id_sessao": "SES-0013",
+    "id_reclamacao": "REC-0013",
+    "data_sessao": "2026-04-08",
+    "resultado": "NAO_ACORDO",
+    "valor_acordo": null,
+    "parcelas": null,
+    "tempo_sessao_minutos": 35,
+    "observacao": "Não houve acordo na sessão."
+  },
+  {
+    "id_sessao": "SES-0014",
+    "id_reclamacao": "REC-0014",
+    "data_sessao": "2026-04-14",
+    "resultado": "AUSENTE_RECLAMANTE",
+    "valor_acordo": null,
+    "parcelas": null,
+    "tempo_sessao_minutos": 40,
+    "observacao": "Não houve acordo na sessão."
+  },
+  {
+    "id_sessao": "SES-0015",
+    "id_reclamacao": "REC-0015",
+    "data_sessao": "2026-04-20",
+    "resultado": "ACORDO",
+    "valor_acordo": 720.0,
+    "parcelas": 1,
+    "tempo_sessao_minutos": 50,
+    "observacao": "Acordo formalizado entre as partes."
+  },
+  {
+    "id_sessao": "SES-0016",
+    "id_reclamacao": "REC-0016",
+    "data_sessao": "2026-04-26",
+    "resultado": "ACORDO",
+    "valor_acordo": 126.0,
+    "parcelas": 2,
+    "tempo_sessao_minutos": 60,
+    "observacao": "Acordo formalizado entre as partes."
+  },
+  {
+    "id_sessao": "SES-0017",
+    "id_reclamacao": "REC-0017",
+    "data_sessao": "02/05/2026",
+    "resultado": "NAO_ACORDO",
+    "valor_acordo": null,
+    "parcelas": null,
+    "tempo_sessao_minutos": 75,
+    "observacao": "Não houve acordo na sessão."
+  },
+  {
+    "id_sessao": "SES-0018",
+    "id_reclamacao": "REC-0018",
+    "data_sessao": "2026-05-08",
+    "resultado": "AUSENTE_RECLAMANTE",
+    "valor_acordo": null,
+    "parcelas": null,
+    "tempo_sessao_minutos": 25,
+    "observacao": "Não houve acordo na sessão."
+  },
+  {
+    "id_sessao": "SES-0019",
+    "id_reclamacao": "REC-0019",
+    "data_sessao": "2026-05-14",
+    "resultado": "AUSENTE_RECLAMADO",
+    "valor_acordo": null,
+    "parcelas": null,
+    "tempo_sessao_minutos": 35,
+    "observacao": "Não houve acordo na sessão."
+  },
+  {
+    "id_sessao": "SES-0020",
+    "id_reclamacao": "REC-0020",
+    "data_sessao": "2026-05-20",
+    "resultado": "ACORDO",
+    "valor_acordo": 520.0,
+    "parcelas": 3,
+    "tempo_sessao_minutos": 40,
+    "observacao": "Acordo formalizado entre as partes."
+  },
+  {
+    "id_sessao": "SES-0021",
+    "id_reclamacao": "REC-0021",
+    "data_sessao": "2026-05-26",
+    "resultado": "ACORDO",
+    "valor_acordo": 1050.0,
+    "parcelas": 1,
+    "tempo_sessao_minutos": 50,
+    "observacao": "Acordo formalizado entre as partes."
+  },
+  {
+    "id_sessao": "SES-0022",
+    "id_reclamacao": "REC-0022",
+    "data_sessao": "2026-06-01",
+    "resultado": "AUSENTE_RECLAMANTE",
+    "valor_acordo": null,
+    "parcelas": null,
+    "tempo_sessao_minutos": 60,
+    "observacao": "Não houve acordo na sessão."
+  },
+  {
+    "id_sessao": "SES-0023",
+    "id_reclamacao": "REC-0023",
+    "data_sessao": "2026-06-07",
+    "resultado": "AUSENTE_RECLAMADO",
+    "valor_acordo": null,
+    "parcelas": null,
+    "tempo_sessao_minutos": 75,
+    "observacao": "Não houve acordo na sessão."
+  },
+  {
+    "id_sessao": "SES-0024",
+    "id_reclamacao": "REC-0024",
+    "data_sessao": "2026-06-13",
+    "resultado": "ACORDO",
+    "valor_acordo": 72.0,
+    "parcelas": 1,
+    "tempo_sessao_minutos": 25,
+    "observacao": "Acordo formalizado entre as partes."
+  },
+  {
+    "id_sessao": "SES-0025",
+    "id_reclamacao": "REC-0025",
+    "data_sessao": "2026-06-19",
+    "resultado": "ACORDO",
+    "valor_acordo": 384.0,
+    "parcelas": 2,
+    "tempo_sessao_minutos": 35,
+    "observacao": "Acordo formalizado entre as partes."
+  },
+  {
+    "id_sessao": "SES-0026",
+    "id_reclamacao": "REC-0026",
+    "data_sessao": "2026-06-25",
+    "resultado": "ACORDO",
+    "valor_acordo": 840.0,
+    "parcelas": 3,
+    "tempo_sessao_minutos": 40,
+    "observacao": "Acordo formalizado entre as partes."
+  },
+  {
+    "id_sessao": "SES-0027",
+    "id_reclamacao": "REC-0027",
+    "data_sessao": "2026-07-01",
+    "resultado": "AUSENTE_RECLAMADO",
+    "valor_acordo": null,
+    "parcelas": null,
+    "tempo_sessao_minutos": 50,
+    "observacao": "Não houve acordo na sessão."
+  },
+  {
+    "id_sessao": "SES-0028",
+    "id_reclamacao": "REC-0028",
+    "data_sessao": "2026-07-07",
+    "resultado": "ACORDO",
+    "valor_acordo": 325.0,
+    "parcelas": 2,
+    "tempo_sessao_minutos": 60,
+    "observacao": "Acordo formalizado entre as partes."
+  },
+  {
+    "id_sessao": "SES-0029",
+    "id_reclamacao": "REC-0029",
+    "data_sessao": "2026-07-13",
+    "resultado": "NAO_ACORDO",
+    "valor_acordo": null,
+    "parcelas": null,
+    "tempo_sessao_minutos": 75,
+    "observacao": "Não houve acordo na sessão."
+  },
+  {
+    "id_sessao": "SES-0030",
+    "id_reclamacao": "REC-0030",
+    "data_sessao": "2026-07-19",
+    "resultado": "ACORDO",
+    "valor_acordo": 256.0,
+    "parcelas": 1,
+    "tempo_sessao_minutos": 25,
+    "observacao": "Acordo formalizado entre as partes."
+  },
+  {
+    "id_sessao": "SES-0031",
+    "id_reclamacao": "REC-0031",
+    "data_sessao": "2026-07-25",
+    "resultado": "ACORDO",
+    "valor_acordo": 630.0,
+    "parcelas": "2",
+    "tempo_sessao_minutos": 35,
+    "observacao": "Acordo formalizado entre as partes."
+  },
+  {
+    "id_sessao": "SES-0032",
+    "id_reclamacao": "REC-0032",
+    "data_sessao": "2026-07-31",
+    "resultado": "ACORDO",
+    "valor_acordo": 108.0,
+    "parcelas": 3,
+    "tempo_sessao_minutos": 40,
+    "observacao": "Acordo formalizado entre as partes."
+  },
+  {
+    "id_sessao": "SES-0033",
+    "id_reclamacao": "REC-0033",
+    "data_sessao": "2026-08-06",
+    "resultado": "NAO_ACORDO",
+    "valor_acordo": null,
+    "parcelas": null,
+    "tempo_sessao_minutos": 50,
+    "observacao": "Não houve acordo na sessão."
+  },
+  {
+    "id_sessao": "SES-0034",
+    "id_reclamacao": "REC-0034",
+    "data_sessao": "2026-08-12",
+    "resultado": "AUSENTE_RECLAMANTE",
+    "valor_acordo": null,
+    "parcelas": null,
+    "tempo_sessao_minutos": 60,
+    "observacao": "Não houve acordo na sessão."
+  },
+  {
+    "id_sessao": "SES-0035",
+    "id_reclamacao": "REC-0035",
+    "data_sessao": "2026-08-18",
+    "resultado": "ACORDO",
+    "valor_acordo": 200.0,
+    "parcelas": 3,
+    "tempo_sessao_minutos": 75,
+    "observacao": "Acordo formalizado entre as partes."
+  },
+  {
+    "id_sessao": "SES-0036",
+    "id_reclamacao": "REC-0036",
+    "data_sessao": "2026-08-24",
+    "resultado": "ACORDO",
+    "valor_acordo": 455.0,
+    "parcelas": 1,
+    "tempo_sessao_minutos": 25,
+    "observacao": "Acordo formalizado entre as partes."
+  },
+  {
+    "id_sessao": "SES-0037",
+    "id_reclamacao": "REC-0037",
+    "data_sessao": "2026-01-22",
+    "resultado": "NAO_ACORDO",
+    "valor_acordo": "300,00",
+    "parcelas": null,
+    "tempo_sessao_minutos": 35,
+    "observacao": "Não houve acordo na sessão."
+  },
+  {
+    "id_sessao": "SES-0038",
+    "id_reclamacao": "REC-0038",
+    "data_sessao": "2026-01-28",
+    "resultado": "AUSENTE_RECLAMANTE",
+    "valor_acordo": null,
+    "parcelas": null,
+    "tempo_sessao_minutos": 40,
+    "observacao": "Não houve acordo na sessão."
+  },
+  {
+    "id_sessao": "SES-0039",
+    "id_reclamacao": "REC-0039",
+    "data_sessao": "2026-02-03",
+    "resultado": "AUSENTE_RECLAMADO",
+    "valor_acordo": null,
+    "parcelas": null,
+    "tempo_sessao_minutos": 50,
+    "observacao": "Não houve acordo na sessão."
+  },
+  {
+    "id_sessao": "SES-0040",
+    "id_reclamacao": "REC-0040",
+    "data_sessao": "2026-02-09",
+    "resultado": "ACORDO",
+    "valor_acordo": 144.0,
+    "parcelas": 2,
+    "tempo_sessao_minutos": 60,
+    "observacao": "Acordo formalizado entre as partes."
+  }
+]

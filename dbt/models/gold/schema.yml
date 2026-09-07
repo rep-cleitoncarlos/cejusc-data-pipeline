@@ -1,0 +1,135 @@
+version: 2
+
+models:
+
+  - name: dim_tempo
+    description: >
+      Dimensão de tempo utilizada para análises das sessões de conciliação.
+      Uma linha representa um dia do calendário utilizado pelas sessões.
+
+    columns:
+
+      - name: data_sk
+        description: "Chave substituta da data no formato YYYYMMDD."
+        tests:
+          - not_null
+          - unique
+
+      - name: data
+        description: "Data da sessão de conciliação."
+        tests:
+          - not_null
+          - unique
+
+      - name: ano
+        description: "Ano da data."
+
+      - name: mes
+        description: "Número do mês."
+
+      - name: nome_mes
+        description: "Nome do mês em português."
+
+
+  - name: dim_tipo_reclamacao
+    description: >
+      Dimensão contendo os tipos de reclamação padronizados.
+      Uma linha representa um tipo de reclamação.
+
+    columns:
+
+      - name: tipo_reclamacao_sk
+        description: "Chave substituta do tipo de reclamação."
+        tests:
+          - not_null
+          - unique
+
+      - name: tipo_reclamacao
+        description: "Descrição padronizada do tipo de reclamação."
+        tests:
+          - not_null
+          - unique
+          - accepted_values:
+              arguments:
+                values:
+                  - cancelamento de serviço
+                  - cobranca_indevida
+                  - falha_servico
+                  - problema contratual
+
+
+  - name: fato_conciliacao
+    description: >
+      Fato central da análise de conciliação.
+      Uma linha representa uma sessão de conciliação associada a uma reclamação.
+
+    columns:
+
+      - name: sessao_id
+        description: "Identificador da sessão de conciliação."
+        tests:
+          - not_null
+          - unique
+
+      - name: reclamacao_id
+        description: "Identificador da reclamação associada à sessão."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_reclamacoes')
+                field: id_reclamacao
+
+      - name: data_sessao_sk
+        description: "Chave da dimensão de tempo."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_tempo')
+                field: data_sk
+
+      - name: tipo_reclamacao_sk
+        description: "Chave da dimensão de tipo de reclamação."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_tipo_reclamacao')
+                field: tipo_reclamacao_sk
+
+      - name: resultado
+        description: "Resultado da sessão de conciliação."
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - ACORDO
+                  - NAO_ACORDO
+                  - AUSENTE_RECLAMANTE
+                  - AUSENTE_RECLAMADO
+
+      - name: sessao_realizada
+        description: >
+          Indicador de sessão realizada.
+          1 para ACORDO ou NAO_ACORDO e 0 para ausências.
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - 0
+                  - 1
+
+      - name: houve_acordo
+        description: >
+          Indicador de acordo realizado.
+          1 quando o resultado é ACORDO e 0 nos demais casos.
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - 0
+                  - 1

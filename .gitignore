@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+
+# Python tooling
+.pytest_cache/
+.mypy_cache/
+
+# dbt
+dbt/target/
+dbt/logs/
+dbt/.user.yml
+dbt/packages/
+
+# DuckDB local
+*.duckdb
+*.duckdb.wal
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
