@@ -12,7 +12,20 @@ def main():
     caminho = BRONZE_DIR / "reclamacoes"
 
     tabela_atual = DeltaTable(caminho)
-    tabela_anterior = DeltaTable(caminho, version=0)
+
+    versao_atual = tabela_atual.version()
+
+    if versao_atual == 0:
+        print("A tabela Delta possui apenas uma versão.")
+        print("É necessário ter pelo menos duas versões para demonstrar Time Travel.")
+        return
+
+    versao_anterior = versao_atual - 1
+
+    tabela_anterior = DeltaTable(
+        caminho,
+        version=versao_anterior
+    )
 
     df_atual = tabela_atual.to_pandas()
     df_anterior = tabela_anterior.to_pandas()
@@ -21,20 +34,18 @@ def main():
     print("DELTA TIME TRAVEL")
     print("=" * 60)
 
-    print(f"\nVersão atual: {tabela_atual.version()}")
-    print(f"Versão anterior: {tabela_anterior.version()}")
+    print(f"\nVersão atual:     {versao_atual}")
+    print(f"Versão anterior:  {versao_anterior}")
 
     print("\nQuantidade de registros:")
-    print(f"Versão atual:    {len(df_atual)}")
-    print(f"Versão anterior: {len(df_anterior)}")
+    print(f"Versão atual:     {len(df_atual)}")
+    print(f"Versão anterior:  {len(df_anterior)}")
 
-    # Registra cada versão como uma tabela temporária no DuckDB.
     conn = duckdb.connect()
 
     conn.register("reclamacoes_atual", df_atual)
     conn.register("reclamacoes_anterior", df_anterior)
 
-    # Esta é a MESMA consulta executada nas duas versões.
     consulta = """
         SELECT
             COUNT(*) AS quantidade_registros,
@@ -54,10 +65,10 @@ def main():
     print("MESMA CONSULTA EM DUAS VERSÕES")
     print("-" * 60)
 
-    print("\nVersão anterior:")
+    print(f"\nVersão {versao_anterior}:")
     print(resultado_anterior.to_string(index=False))
 
-    print("\nVersão atual:")
+    print(f"\nVersão {versao_atual}:")
     print(resultado_atual.to_string(index=False))
 
     conn.close()
