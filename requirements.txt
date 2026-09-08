@@ -2,3 +2,5 @@ pandas
 pyarrow
 deltalake
 dbt-duckdb
+streamlit
+plotly

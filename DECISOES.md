@@ -105,16 +105,25 @@ informação da sessão.
 
 ## 5. Registros inválidos
 
-A Bronze preserva os registros exatamente como recebidos,
-inclusive registros com defeitos.
+A Bronze preserva os registros exatamente como recebidos, inclusive
+registros que apresentem defeitos de formato ou inconsistências.
 
-Quando um registro apresentar problema que impeça sua utilização
-em determinado indicador, ele deve ser direcionado para uma
-área de quarentena para análise da qualidade dos dados.
+Durante a transformação para a Silver, os dados são tratados conforme
+regras de limpeza e padronização documentadas nos modelos dbt. Defeitos
+que puderem ser corrigidos com segurança permanecem no fluxo normal do
+pipeline.
 
-A quarentena não substitui a Bronze.
+Quando um registro não puder ser interpretado ou corrigido com segurança,
+ele deverá ser direcionado para `data/quarantine/`, juntamente com a
+identificação do motivo da rejeição, para análise da qualidade dos dados.
 
-A Bronze continua sendo a cópia histórica dos dados recebidos.
+A quarentena não substitui a Bronze. A Bronze continua sendo a cópia
+histórica dos dados recebidos e preserva os dados originais para auditoria
+e eventual reprocessamento.
+
+Neste PoC, os defeitos introduzidos nas fontes são corrigíveis pelas regras
+de transformação da Silver. Portanto, não há registros efetivamente
+direcionados para a quarentena.
 
 ---
 
