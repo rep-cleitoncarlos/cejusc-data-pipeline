@@ -43,6 +43,40 @@ Cada sessão possui uma reclamação associada por meio de
 
 A chave da sessão (`sessao_id`) é única na fato.
 
+### Escolha entre estrela e tabela larga
+
+Foi escolhido o modelo dimensional em estrela porque a pergunta
+possui recortes por período e tipo de reclamação.
+
+A separação entre fato e dimensões evita repetir atributos de
+dimensões na fato e facilita a expansão futura da análise para
+outras dimensões, como conciliador ou canal.
+
+Uma tabela larga seria possível, mas aumentaria a repetição de
+atributos e misturaria diferentes responsabilidades no mesmo modelo.
+
+### O que ficou de fora
+
+A fato não possui uma linha para cada reclamação isoladamente,
+pois o foco da pergunta de negócio está nas sessões de conciliação.
+
+Os indicadores agregados, como taxa de acordo e redução média,
+também não fazem parte da fato. Eles são calculados na camada
+de Consumo, pois dependem do agrupamento por período e tipo de
+reclamação.
+
+### Escolha entre estrela e tabela larga
+
+Foi escolhido o modelo dimensional em estrela porque a análise
+possui dimensões de período e tipo de reclamação.
+
+A separação entre fato e dimensões reduz a repetição de atributos
+e facilita a expansão futura das análises.
+
+Uma tabela larga seria possível, porém concentraria atributos
+descritivos e métricas no mesmo modelo, aumentando a repetição
+dos dados.
+
 ---
 
 ## 3. Tratamento de dado ambíguo
