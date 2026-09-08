@@ -6,9 +6,9 @@ O pipeline utiliza uma arquitetura em camadas:
 
 - `data/raw`: arquivos CSV e JSON recebidos das fontes.
 - `data/bronze`: dados preservados em Delta Lake.
-- `dbt/model/Silver`: dados tratados, tipados e padronizados.
-- `dbt/model/Gold`: modelo dimensional para análise.
-- `dbt/model/Consumo`: modelo orientado à pergunta de negócio.
+- `dbt/models/Silver`: dados tratados, tipados e padronizados.
+- `dbt/models/Gold`: modelo dimensional para análise.
+- `dbt/models/Consumo`: modelo orientado à pergunta de negócio.
 
 A ingestão é realizada em Python com Pandas.
 
