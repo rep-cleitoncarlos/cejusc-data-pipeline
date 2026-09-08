@@ -45,7 +45,7 @@ O cálculo considera somente acordos com valor reclamado maior que zero e valor 
 ---
 
 ## 2. Arquitetura
-
+```text
 ┌─────────────────────────────────────┐
 │             FONTES                  │
 │                                     │
@@ -111,7 +111,7 @@ O cálculo considera somente acordos com valor reclamado maior que zero e valor 
 │ Filtros                             │
 │ Tabelas                             │
 └─────────────────────────────────────┘
-
+```
 ---
 
 ## 3. Tecnologias
@@ -130,7 +130,7 @@ O cálculo considera somente acordos com valor reclamado maior que zero e valor 
 ---
 
 ## 4. Estrutura do projeto
-
+```text
 cejusc-data-pipeline/
 │
 ├── app/
@@ -197,7 +197,7 @@ cejusc-data-pipeline/
 ├── README.md
 ├── requirements.txt
 └── .gitignore
-
+```
 ---
 
 ## 5. Fontes de dados
