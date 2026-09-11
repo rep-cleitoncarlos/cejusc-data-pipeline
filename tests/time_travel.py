@@ -5,166 +5,149 @@ from deltalake import DeltaTable
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-BRONZE_DIR = BASE_DIR / "data" / "bronze"
+DELTA_PATH = BASE_DIR / "data" / "bronze" / "reclamacoes"
+SQL_PATH = BASE_DIR / "sql" / "demonstracao_time_travel.sql"
 
 
-def main():
-    caminho = BRONZE_DIR / "reclamacoes"
+def executar():
+    tabela = DeltaTable(DELTA_PATH)
 
-    tabela_atual = DeltaTable(caminho)
-    versao_atual = tabela_atual.version()
-
-    if versao_atual == 0:
-        print("A tabela Delta possui apenas uma versão.")
-        print("É necessário ter pelo menos duas versões para demonstrar Time Travel.")
-        return
-
+    versao_atual = tabela.version()
     versao_anterior = versao_atual - 1
-
-    tabela_anterior = DeltaTable(
-        caminho,
-        version=versao_anterior
-    )
-
-    df_atual = tabela_atual.to_pandas()
-    df_anterior = tabela_anterior.to_pandas()
 
     print("=" * 60)
     print("DELTA TIME TRAVEL")
     print("=" * 60)
+    print()
 
-    print(f"\nVersão atual:     {versao_atual}")
+    print(f"Versão atual:     {versao_atual}")
     print(f"Versão anterior:  {versao_anterior}")
+    print()
 
-    print("\nQuantidade de registros:")
-    print(f"Versão atual:     {len(df_atual)}")
-    print(f"Versão anterior:  {len(df_anterior)}")
+    con = duckdb.connect()
 
-    # ---------------------------------------------------------
-    # MESMA CONSULTA NAS DUAS VERSÕES
-    # ---------------------------------------------------------
+    # =========================================================
+    # Carrega o SQL da demonstração
+    # =========================================================
 
-    conn = duckdb.connect()
+    sql = SQL_PATH.read_text(encoding="utf-8")
 
-    conn.register(
-        "reclamacoes_atual",
-        df_atual
+    sql = sql.replace(
+        "{{VERSAO_ANTERIOR}}",
+        str(versao_anterior)
     )
 
-    conn.register(
-        "reclamacoes_anterior",
-        df_anterior
-    )
-
-    consulta = """
-        SELECT
-            COUNT(*) AS quantidade_registros,
-            COUNT(DISTINCT id_reclamacao) AS reclamacoes_distintas
-        FROM {tabela}
-    """
-
-    resultado_anterior = conn.execute(
-        consulta.format(
-            tabela="reclamacoes_anterior"
-        )
-    ).fetchdf()
-
-    resultado_atual = conn.execute(
-        consulta.format(
-            tabela="reclamacoes_atual"
-        )
-    ).fetchdf()
-
-    print("\n" + "-" * 60)
-    print("MESMA CONSULTA EM DUAS VERSÕES")
+    print("Quantidade de registros:")
     print("-" * 60)
 
-    print(f"\nVersão {versao_anterior}:")
-    print(resultado_anterior.to_string(index=False))
+    # Consulta versão atual
+    atual = con.execute(
+        f"""
+        SELECT COUNT(*) AS total_registros
+        FROM delta_scan('{DELTA_PATH.as_posix()}')
+        """
+    ).fetchone()[0]
 
-    print(f"\nVersão {versao_atual}:")
-    print(resultado_atual.to_string(index=False))
+    # Consulta versão anterior
+    anterior = con.execute(
+        f"""
+        SELECT COUNT(*) AS total_registros
+        FROM delta_scan(
+            '{DELTA_PATH.as_posix()}',
+            version => {versao_anterior}
+        )
+        """
+    ).fetchone()[0]
 
-    # ---------------------------------------------------------
-    # REGISTRO ESPECÍFICO DA DEMONSTRAÇÃO
-    # ---------------------------------------------------------
+    print(f"ATUAL       {atual}")
+    print(f"ANTERIOR    {anterior}")
+    print()
 
-    consulta_registro = """
+    # =========================================================
+    # Verifica REC-TIME-TRAVEL
+    # =========================================================
+
+    print("-" * 60)
+    print("REGISTRO DE TESTE")
+    print("-" * 60)
+
+    registro_anterior = con.execute(
+        f"""
         SELECT
             id_reclamacao,
             id_processo,
             tipo_reclamacao,
             valor_reclamado
-        FROM {tabela}
+        FROM delta_scan(
+            '{DELTA_PATH.as_posix()}',
+            version => {versao_anterior}
+        )
         WHERE id_reclamacao = 'REC-TIME-TRAVEL'
-    """
+        """
+    ).fetchone()
 
-    registro_anterior = conn.execute(
-        consulta_registro.format(
-            tabela="reclamacoes_anterior"
-        )
-    ).fetchdf()
+    registro_atual = con.execute(
+        f"""
+        SELECT
+            id_reclamacao,
+            id_processo,
+            tipo_reclamacao,
+            valor_reclamado
+        FROM delta_scan('{DELTA_PATH.as_posix()}')
+        WHERE id_reclamacao = 'REC-TIME-TRAVEL'
+        """
+    ).fetchone()
 
-    registro_atual = conn.execute(
-        consulta_registro.format(
-            tabela="reclamacoes_atual"
-        )
-    ).fetchdf()
+    print()
+    print(f"Versão {versao_anterior}:")
 
-    print("\n" + "-" * 60)
-    print("REGISTRO DE TESTE")
+    if registro_anterior:
+        print(f"  id_reclamacao      {registro_anterior[0]}")
+        print(f"  id_processo        {registro_anterior[1]}")
+        print(f"  tipo_reclamacao    {registro_anterior[2]}")
+        print(f"  valor_reclamado    {registro_anterior[3]}")
+    else:
+        print("  REC-TIME-TRAVEL não encontrado.")
+
+    print()
+    print(f"Versão {versao_atual}:")
+
+    if registro_atual:
+        print(f"  id_reclamacao      {registro_atual[0]}")
+        print(f"  id_processo        {registro_atual[1]}")
+        print(f"  tipo_reclamacao    {registro_atual[2]}")
+        print(f"  valor_reclamado    {registro_atual[3]}")
+    else:
+        print("  REC-TIME-TRAVEL não encontrado.")
+
+    print()
     print("-" * 60)
-
-    print(f"\nVersão {versao_anterior}:")
-    if registro_anterior.empty:
-        print("REC-TIME-TRAVEL não encontrado.")
-    else:
-        print(registro_anterior.to_string(index=False))
-
-    print(f"\nVersão {versao_atual}:")
-    if registro_atual.empty:
-        print("REC-TIME-TRAVEL não encontrado.")
-    else:
-        print(registro_atual.to_string(index=False))
-
-    # ---------------------------------------------------------
-    # CONCLUSÃO AUTOMÁTICA
-    # ---------------------------------------------------------
-
-    print("\n" + "-" * 60)
     print("RESULTADO DO TIME TRAVEL")
     print("-" * 60)
 
-    if registro_anterior.empty:
+    if registro_anterior and not registro_atual:
         print(
-            f"✓ REC-TIME-TRAVEL não existe na versão {versao_anterior}."
+            f"✓ A versão {versao_anterior} contém "
+            "REC-TIME-TRAVEL."
         )
+        print(
+            f"✓ A versão {versao_atual} não contém "
+            "REC-TIME-TRAVEL."
+        )
+        print(
+            "✓ O estado da versão anterior foi recuperado "
+            "com sucesso."
+        )
+        print()
+        print("TIME TRAVEL VALIDADO COM SUCESSO")
     else:
         print(
-            f"✗ REC-TIME-TRAVEL já existe na versão {versao_anterior}."
+            "✗ A diferença esperada entre as versões "
+            "não foi identificada."
         )
 
-    if not registro_atual.empty:
-        print(
-            f"✓ REC-TIME-TRAVEL existe na versão {versao_atual}."
-        )
-    else:
-        print(
-            f"✗ REC-TIME-TRAVEL não existe na versão {versao_atual}."
-        )
-
-    if registro_anterior.empty and not registro_atual.empty:
-        print(
-            "✓ O histórico Delta permite recuperar os dois estados "
-            "da tabela."
-        )
-    else:
-        print(
-            "⚠ A diferença esperada entre as versões não foi identificada."
-        )
-
-    conn.close()
+    con.close()
 
 
 if __name__ == "__main__":
-    main()
+    executar()

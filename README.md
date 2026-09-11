@@ -190,8 +190,8 @@ cejusc-data-pipeline/
 │       └── consumo/
 │           ├── resumo_conciliacao.sql
 │           ├── indicadores_gerais.sql
-│           ├── indicadores_dashboard.sql
-│           └── schema.yml
+│           └── indicadores_dashboard.sql
+│
 │
 ├── DECISOES.md
 ├── README.md
@@ -337,17 +337,16 @@ data/bronze/
 
 Cada tabela Delta possui seu próprio histórico de versões.
 
-Estado atual:
+A tabela `reclamacoes` possui múltiplas versões no histórico.
+A demonstração de Time Travel utiliza duas versões consecutivas,
+identificadas dinamicamente pelo script de teste.
 
-```text
-reclamacoes
-versão atual: 8
 
-sessoes_conciliacao
-versão atual: 5
-```
+Cada tabela Delta possui seu próprio histórico transacional de versões.
+Por isso, os números de versão de tabelas diferentes não precisam coincidir.
 
-As versões não precisam possuir o mesmo número, pois cada tabela possui seu próprio histórico transacional.
+A demonstração de Time Travel utiliza duas versões consecutivas da tabela
+`reclamacoes`, identificadas dinamicamente pelo script de teste.
 
 ---
 
@@ -590,55 +589,89 @@ O build contempla:
 
 ## 14. Delta Lake Time Travel
 
-O projeto demonstra o histórico de versões do Delta Lake.
+O projeto demonstra o histórico de versões do Delta Lake e a
+possibilidade de consultar estados anteriores da tabela.
 
-Estado inicial:
+A demonstração utiliza a tabela Delta:
 
 ```text
-Versão 6
-120 registros
+data/bronze/reclamacoes
 ```
-
-Foi executado um teste que adicionou:
+Durante o teste, foi criado um registro técnico exclusivamente
+para demonstrar o versionamento:
 
 ```text
 REC-TIME-TRAVEL
 ```
-
-Resultado:
+Na versão anterior, o registro estava presente:
 
 ```text
-Versão 7
+Versão 9
+
 121 registros
+
+REC-TIME-TRAVEL: presente
 ```
 
-Posteriormente, o pipeline foi executado novamente a partir dos arquivos Raw:
+Posteriormente, o pipeline foi executado novamente a partir dos
+arquivos da camada Raw.
+
+O pipeline reconstruiu a tabela Bronze a partir das fontes originais,
+resultando na versão seguinte, utilizada como estado atual na demonstração:
 
 ```text
-Versão 8
-120 registros
-```
+Versão 10
 
-Comparação:
-
-```text
-Versão 6
 120 registros
+
 REC-TIME-TRAVEL: ausente
+```
 
-Versão 7
+A comparação realizada pelo teste de Time Travel foi:
+
+```text
+Versão 9
 121 registros
 REC-TIME-TRAVEL: presente
 
-Versão 8
+Versão 10
 120 registros
 REC-TIME-TRAVEL: ausente
 ```
 
+O teste também recupera explicitamente a versão anterior utilizando
+a funcionalidade de Time Travel do Delta Lake.
+
 Isso demonstra que:
 
-1. o estado atual pode ser reconstruído a partir da fonte Raw;
-2. o Delta Lake mantém o histórico das versões anteriores.
+o estado atual da camada Bronze pode ser reconstruído a partir
+dos arquivos da camada Raw;
+o Delta Lake mantém o histórico das versões da tabela;
+uma versão anterior pode ser consultada mesmo após uma nova
+execução do pipeline;
+o versionamento permite recuperar e comparar estados anteriores
+dos dados.
+
+A validação foi realizada pelo script:
+
+```text
+tests/time_travel.py
+```
+A demonstração utiliza o SQL:
+
+```text
+sql/demonstracao_time_travel.sql
+```
+
+Resultado da validação:
+
+```text
+✓ A versão 9 contém REC-TIME-TRAVEL.
+✓ A versão 10 não contém REC-TIME-TRAVEL.
+✓ O estado da versão anterior foi recuperado com sucesso.
+
+TIME TRAVEL VALIDADO COM SUCESSO
+```
 
 ---
 
@@ -707,22 +740,24 @@ Python
 → ingestão e metadados técnicos
 
 Bronze
-→ preservação dos dados
+→ preservação dos dados recebidos
 
 Silver
 → limpeza, tipagem e padronização
 
 Gold
-→ modelagem e regras necessárias
+→ modelagem analítica e classificações derivadas necessárias
+   ao modelo, como sessão realizada e ocorrência de acordo
 
 Consumo
-→ cálculo dos indicadores orientados à pergunta
+→ cálculo dos indicadores orientados à pergunta de negócio
 
 Streamlit
-→ apresentação
-```
+→ apresentação dos indicadores já calculados
 
-A aplicação Streamlit consome indicadores já calculados pela camada de consumo.
+```
+As métricas da pergunta de negócio são calculadas na camada de
+Consumo. O Streamlit não implementa nem recalcula essas regras.
 
 ---
 
@@ -747,7 +782,7 @@ servem como organização física do projeto, enquanto as tabelas analíticas s�
 
 ---
 
-## 20. Resultado atual
+## 20. Resultado por ano
 
 Com os dados sintéticos atuais:
 -
@@ -762,19 +797,7 @@ A taxa de acordo considera somente as sessões realizadas.
 
 ---
 
-## 21. Resultado por ano
-
-| Ano       | Sessões realizadas | Acordos | Taxa de acordo | Redução média |
-| --------- | -----------------: | ------: | -------------: | ------------: |
-| 2024      |                 28 |       8 |         28,57% |        32,32% |
-| 2025      |                 29 |      10 |         34,48% |        32,18% |
-| 2026      |                 28 |       9 |         32,14% |        31,11% |
-| **Total** |             **85** |  **27** |     **31,76%** |    **31,87%** |
-
-
----
-
-## 22. Resultado por tipo de reclamação
+## 21. Resultado por tipo de reclamação
 
 | Tipo de reclamação      | Sessões realizadas | Acordos | Taxa de acordo | Redução média |
 | ----------------------- | -----------------: | ------: | -------------: | ------------: |
@@ -786,7 +809,7 @@ A taxa de acordo considera somente as sessões realizadas.
 
 ---
 
-## 23. Consulta final
+## 22. Consulta final
 
 A consulta utilizada para responder à pergunta de negócio está em:
 
@@ -800,7 +823,7 @@ A consulta final apenas seleciona os indicadores já calculados na camada de Con
 
 ---
 
-## 24. Dashboard
+## 23. Dashboard
 
 A aplicação Streamlit está em:
 
@@ -832,7 +855,7 @@ A aplicação não recalcula as regras de negócio.
 
 ---
 
-## 25. Execução
+## 24. Execução
 
 ### Instalação
 
@@ -877,7 +900,7 @@ streamlit run app/streamlit_app.py
 
 ---
 
-## 26. Documentação do dbt
+## 25. Documentação do dbt
 
 Gerar documentação:
 
@@ -903,7 +926,7 @@ A documentação permite visualizar:
 
 ---
 
-## 27. Time Travel
+## 26. Time Travel
 
 Criar uma nova versão:
 
@@ -921,7 +944,7 @@ A demonstração compara a versão atual com a anterior e verifica a presença d
 
 ---
 
-## 28. Repositório
+## 27. Repositório
 
 O projeto deve conter:
 
@@ -941,7 +964,7 @@ Não são utilizados dados pessoais reais.
 
 ---
 
-## 29. Critérios de aceite
+## 28. Critérios de aceite
 
 O projeto deve ser capaz de ser reconstruído a partir de um clone limpo.
 
@@ -962,7 +985,7 @@ O resultado esperado é a reconstrução das camadas analíticas sem necessidade
 
 ---
 
-## 30. Apresentação
+## 29. Apresentação
 
 Sugestão de roteiro:
 
@@ -1020,9 +1043,8 @@ Mostrar o DAG de dependências dos modelos.
 Demonstrar:
 
 ```text
-Versão 6 → 120 registros
-Versão 7 → 121 registros
-Versão 8 → 120 registros
+Versão 9 → 121 registros
+Versão 10 → 120 registros
 ```
 
 e consultar:
@@ -1061,7 +1083,7 @@ A partir dos dados sintéticos atuais:
 
 ---
 
-## 31. Estado da documentação
+## 30. Estado da documentação
 
 Esta documentação representa o estado consolidado do projeto em **setembro de 2026**.
 
